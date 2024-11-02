@@ -61,8 +61,8 @@ def evaluate(model, loss_fn, meta_classes, task_lr, task_type, metrics, params, 
         #print ( Y_que.detach().numpy() )
         # move to GPU if available
         if params.cuda:
-            X_sup, Y_sup = X_sup.cuda(1), Y_sup.cuda(1)
-            X_que, Y_que = X_que.cuda(1), Y_que.cuda(1)
+            X_sup, Y_sup = X_sup.cuda(), Y_sup.cuda()
+            X_que, Y_que = X_que.cuda(), Y_que.cuda()
 
         # Direct optimization
         net_clone = copy.deepcopy(model)
@@ -163,7 +163,7 @@ if __name__ == '__main__':
     task_type = SER
 
     if params.cuda:
-        model = MetaLearner(params).cuda(1)
+        model = MetaLearner(params).cuda()
     else:
         model = MetaLearner(params)
     meta_optimizer = torch.optim.Adam(model.parameters(), lr=meta_lr)

@@ -64,7 +64,7 @@ def train_single_task(model, task_lr, loss_fn, dataloaders, params):
 
     # move to GPU if available
     if params.cuda:
-        X_sup, Y_sup = X_sup.cuda(1), Y_sup.cuda(1)
+        X_sup, Y_sup = X_sup.cuda(), Y_sup.cuda()
 
     # compute model output and loss
     Y_sup_hat = model(X_sup)
@@ -202,7 +202,7 @@ def train_and_evaluate(model,
                 dl_meta = dataloaders['meta']
                 X_meta, Y_meta = next(iter(dl_meta))
                 if params.cuda:
-                    X_meta, Y_meta = X_meta.cuda(1), Y_meta.cuda(1)
+                    X_meta, Y_meta = X_meta.cuda(), Y_meta.cuda()
 
                 a_dict = adapted_state_dicts[n_task]
                 net_clone1.load_state_dict(a_dict)
@@ -332,7 +332,7 @@ if __name__ == '__main__':
 
     # Define the model and optimizer
     if params.cuda:
-        model = MetaLearner(params).cuda(1)
+        model = MetaLearner(params).cuda()
     else:
         model = MetaLearner(params)
     meta_optimizer = torch.optim.Adam(model.parameters(), lr=meta_lr)
